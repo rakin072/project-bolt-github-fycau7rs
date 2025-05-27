@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { MapPin, Bed, Bath, Square, Heart, ArrowRight, Star } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const FeaturedProperties = () => {
@@ -8,7 +7,6 @@ const FeaturedProperties = () => {
   const [likedProperties, setLikedProperties] = useState<Set<number>>(new Set());
   const [selectedProperty, setSelectedProperty] = useState<typeof properties[0] | null>(null);
   const [showAllProperties, setShowAllProperties] = useState(false);
-  const { toast } = useToast();
 
   const properties = [
     {
@@ -221,25 +219,14 @@ const FeaturedProperties = () => {
     const newLikedProperties = new Set(likedProperties);
     if (likedProperties.has(propertyId)) {
       newLikedProperties.delete(propertyId);
-      toast({
-        title: "Removed from favorites",
-        description: `${propertyTitle} has been removed from your favorites.`,
-      });
     } else {
       newLikedProperties.add(propertyId);
-      toast({
-        title: "Added to favorites",
-        description: `${propertyTitle} has been added to your favorites.`,
-      });
     }
     setLikedProperties(newLikedProperties);
   };
 
   const handleQuickView = (property: typeof properties[0]) => {
-    toast({
-      title: "Quick View",
-      description: `Opening quick view for ${property.title}`,
-    });
+    // Quick view functionality without toast
   };
 
   const handleViewDetails = (property: typeof properties[0]) => {
@@ -248,14 +235,7 @@ const FeaturedProperties = () => {
 
   const handleScheduleViewing = () => {
     setSelectedProperty(null);
-    
-    toast({
-      title: "Viewing Scheduled",
-      description: "A representative will contact you shortly to confirm your viewing appointment.",
-    });
-
     setTimeout(() => {
-      // Find the specific CTA section with the Schedule Consultation button
       const ctaSection = document.querySelector('#services .glass-card-dark .flex.flex-col.sm\\:flex-row.gap-4.justify-center');
       if (ctaSection) {
         ctaSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -264,20 +244,11 @@ const FeaturedProperties = () => {
   };
 
   const handleVirtualTour = () => {
-    toast({
-      title: "Virtual Tour",
-      description: "Launching virtual tour experience...",
-    });
+    // Virtual tour functionality without toast
   };
 
   const handleContactAgent = () => {
     setSelectedProperty(null);
-    
-    toast({
-      title: "Contact Agent",
-      description: "Connecting you with our property specialist...",
-    });
-
     setTimeout(() => {
       const contactSection = document.getElementById('contact');
       if (contactSection) {
@@ -288,24 +259,17 @@ const FeaturedProperties = () => {
 
   const handleViewAllProperties = () => {
     setShowAllProperties(true);
-    toast({
-      title: "All Properties",
-      description: "Showing all available properties...",
-    });
     const propertiesSection = document.getElementById('properties');
     if (propertiesSection) {
-      propertiesSection.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({
+        top: propertiesSection.offsetTop,
+        behavior: 'smooth'
+      });
     }
   };
 
   const handleExploreAllProperties = () => {
     setShowAllProperties(true);
-    toast({
-      title: "All Properties",
-      description: "Showing all available properties...",
-    });
-    
-    // Scroll to the top of properties section
     const propertiesSection = document.getElementById('properties');
     if (propertiesSection) {
       window.scrollTo({

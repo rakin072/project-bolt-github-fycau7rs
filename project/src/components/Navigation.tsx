@@ -1,17 +1,10 @@
-
 import { useState } from 'react';
 import { Home, Search, Mail, Phone } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
 
   const handleContactClick = () => {
-    toast({
-      title: "Contact Us",
-      description: "Redirecting to contact section...",
-    });
     // Scroll to contact section
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -21,11 +14,6 @@ const Navigation = () => {
   };
 
   const handleNavigation = (sectionId: string, sectionName: string) => {
-    toast({
-      title: `Navigating to ${sectionName}`,
-      description: `Scrolling to ${sectionName} section...`,
-    });
-    
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
