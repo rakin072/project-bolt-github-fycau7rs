@@ -75,11 +75,12 @@ const Navigation = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <button 
-              className="btn-primary flex items-center space-x-2"
+              className="relative group flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-electric-500 to-purple-500 hover:from-electric-600 hover:to-purple-600 text-white font-medium transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:shadow-electric-500/30 active:scale-95 overflow-hidden"
               onClick={handleContactClick}
             >
-              <Phone className="w-4 h-4" />
-              <span>Contact Us</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-electric-500/0 via-white/10 to-electric-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <Phone className="w-4 h-4 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110" />
+              <span className="relative">Contact Us</span>
             </button>
           </div>
 
@@ -97,44 +98,48 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-          <div className="py-4 space-y-4">
+        <div className={`md:hidden transition-all duration-300 ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+          <div className="py-3 space-y-2 px-2">
             <button 
               onClick={() => handleNavigation('home', 'Home')}
-              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left"
+              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left px-4 py-1.5"
             >
               Home
             </button>
             <button 
               onClick={() => handleNavigation('properties', 'Properties')}
-              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left"
+              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left px-4 py-1.5"
             >
               Properties
             </button>
             <button 
               onClick={() => handleNavigation('services', 'Services')}
-              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left"
+              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left px-4 py-1.5"
             >
               Services
             </button>
             <button 
               onClick={() => handleNavigation('about', 'About')}
-              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left"
+              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left px-4 py-1.5"
             >
               About
             </button>
             <button 
               onClick={() => handleNavigation('contact', 'Contact')}
-              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left"
+              className="block text-white hover:text-cyan-400 transition-colors duration-300 w-full text-left px-4 py-1.5"
             >
               Contact
             </button>
-            <button 
-              className="btn-primary w-full mt-4"
-              onClick={handleContactClick}
-            >
-              Contact Us
-            </button>
+            <div className="px-4 pt-1">
+              <button 
+                className="relative group w-full px-8 py-4 rounded-full bg-gradient-to-r from-electric-500 to-purple-500 hover:from-electric-600 hover:to-purple-600 text-white font-medium transition-all duration-500 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-electric-500/30 active:scale-95 flex items-center justify-center space-x-2 overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/30 before:to-transparent before:opacity-100 before:transition-opacity before:duration-500 after:absolute after:inset-0 after:bg-gradient-to-b after:from-transparent after:to-black/20 after:opacity-100 after:transition-opacity after:duration-500 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
+                onClick={handleContactClick}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-electric-500/0 via-white/20 to-electric-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                <Phone className="w-5 h-5 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110 relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]" />
+                <span className="relative z-10 text-base font-semibold tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">Contact Us</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

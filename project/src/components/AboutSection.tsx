@@ -100,10 +100,10 @@ const AboutSection = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-electric-500 via-purple-500 to-cyan-500" />
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-electric-500 via-purple-500 to-cyan-500 hidden md:block" />
 
           {/* Milestones */}
-          <div className="space-y-24">
+          <div className="space-y-12 md:space-y-0">
             {milestones.map((milestone, index) => {
               const Icon = milestone.icon;
               const isEven = index % 2 === 0;
@@ -111,15 +111,15 @@ const AboutSection = () => {
               return (
                 <div
                   key={milestone.year}
-                  className={`relative flex items-center ${
-                    isEven ? 'flex-row' : 'flex-row-reverse'
+                  className={`relative flex flex-col md:flex-row items-center ${
+                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                 >
                   {/* Content */}
-                  <div className={`w-1/2 ${isEven ? 'pr-12' : 'pl-12'} animate-slide-up`} style={{ animationDelay: `${index * 0.2}s` }}>
-                    <div className="glass-card-dark p-6 rounded-xl hover:shadow-xl hover:shadow-electric-500/20 transition-all duration-500">
+                  <div className={`w-full md:w-1/2 ${isEven ? 'md:pr-12' : 'md:pl-12'} animate-slide-up`} style={{ animationDelay: `${index * 0.2}s` }}>
+                    <div className="glass-card-dark p-6 rounded-xl hover:shadow-xl hover:shadow-electric-500/20 transition-all duration-500 group">
                       <div className="flex items-center space-x-3 mb-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-electric-500 to-purple-500 rounded-xl flex items-center justify-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-electric-500 to-purple-500 rounded-xl flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
                           <Icon className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -128,7 +128,7 @@ const AboutSection = () => {
                         </div>
                       </div>
                       <p className="text-gray-300 mb-4">{milestone.description}</p>
-                      <div className="relative h-48 rounded-lg overflow-hidden group">
+                      <div className="relative overflow-hidden rounded-lg aspect-video">
                         <img
                           src={milestone.image}
                           alt={milestone.title}
@@ -140,7 +140,7 @@ const AboutSection = () => {
                   </div>
 
                   {/* Timeline Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-r from-electric-500 to-purple-500 rounded-full flex items-center justify-center z-10">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-r from-electric-500 to-purple-500 rounded-full flex items-center justify-center z-10 hidden md:flex">
                     <div className="w-4 h-4 bg-navy-900 rounded-full" />
                   </div>
                 </div>
@@ -150,11 +150,11 @@ const AboutSection = () => {
         </div>
 
         {/* Team Members Section */}
-        <div className="mt-32 text-center">
-          <h3 className="text-3xl font-bold mb-12">
+        <div className="mt-20">
+          <h3 className="text-3xl font-bold mb-12 text-center">
             Meet Our <span className="text-gradient">Team</span>
           </h3>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {teamMembers.map((member, index) => (
               <div 
                 key={index}
@@ -164,7 +164,7 @@ const AboutSection = () => {
                   <img 
                     src={member.image} 
                     alt={member.name}
-                    className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-electric-500/20 shadow-lg group-hover:border-electric-500/40 transition-all duration-500"
+                    className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-electric-500/20 shadow-lg group-hover:border-electric-500/40 transition-all duration-500 transform group-hover:scale-105"
                   />
                   <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
                     {member.achievements.map((achievement, idx) => {
@@ -181,9 +181,9 @@ const AboutSection = () => {
                     })}
                   </div>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-1">{member.name}</h4>
-                <p className="text-cyan-400 text-sm mb-3">{member.role}</p>
-                <p className="text-gray-300 text-sm mb-4">{member.description}</p>
+                <h4 className="text-xl font-bold text-white mb-1 text-center">{member.name}</h4>
+                <p className="text-cyan-400 text-sm mb-3 text-center">{member.role}</p>
+                <p className="text-gray-300 text-sm mb-4 text-center">{member.description}</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {member.achievements.map((achievement, idx) => (
                     <span 

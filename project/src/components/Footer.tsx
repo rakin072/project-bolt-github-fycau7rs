@@ -83,9 +83,13 @@ const Footer = () => {
                     <a
                       key={social.name}
                       href={social.href}
-                      className="w-10 h-10 glass-card rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-electric-500/20 group"
+                      className="w-10 h-10 glass-card rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-electric-500/20 group touch-manipulation active:scale-95 active:rotate-3 perspective-1000 transform-gpu"
+                      style={{
+                        transformStyle: 'preserve-3d',
+                        WebkitTapHighlightColor: 'transparent'
+                      }}
                     >
-                      <Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-400" />
+                      <Icon className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-transform duration-300 group-active:scale-90" />
                     </a>
                   );
                 })}
@@ -171,20 +175,27 @@ const Footer = () => {
 
         {/* Newsletter Subscription */}
         <div className="py-8 border-t border-gray-700">
-          <div className="glass-card-dark p-6 rounded-2xl">
+          <div className="glass-card-dark p-6 rounded-2xl transform-gpu perspective-1000">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-6">
               <div>
                 <h3 className="text-xl font-bold text-white mb-2">Stay Updated</h3>
                 <p className="text-gray-300">Get the latest property listings and market insights delivered to your inbox.</p>
               </div>
-              <div className="flex w-full md:w-auto space-x-3">
+              <div className="flex flex-col sm:flex-row w-full md:w-auto space-y-3 sm:space-y-0 sm:space-x-3">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 md:w-64 bg-navy-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all duration-300"
+                  className="flex-1 md:w-64 bg-navy-800/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all duration-300 touch-manipulation"
                 />
-                <button className="btn-primary px-6 py-3 whitespace-nowrap">
-                  Subscribe
+                <button 
+                  className="relative group flex items-center justify-center px-8 py-4 rounded-lg bg-gradient-to-r from-electric-500 to-purple-500 hover:from-electric-600 hover:to-purple-600 text-white font-medium transition-all duration-500 transform-gpu hover:scale-105 hover:shadow-lg hover:shadow-electric-500/30 active:scale-95 active:rotate-1 active:translate-y-0.5 overflow-hidden touch-manipulation perspective-1000"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    WebkitTapHighlightColor: 'transparent'
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-electric-500/0 via-white/10 to-electric-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  <span className="relative text-lg font-semibold transform-gpu group-active:scale-95">Subscribe Now</span>
                 </button>
               </div>
             </div>
