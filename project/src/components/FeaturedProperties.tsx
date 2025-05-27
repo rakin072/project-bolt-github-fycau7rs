@@ -6,7 +6,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 const FeaturedProperties = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [likedProperties, setLikedProperties] = useState<Set<number>>(new Set());
-  const [selectedProperty, setSelectedProperty] = useState<any>(null);
+  const [selectedProperty, setSelectedProperty] = useState<typeof properties[0] | null>(null);
+  const [showAllProperties, setShowAllProperties] = useState(false);
   const { toast } = useToast();
 
   const properties = [
@@ -246,10 +247,20 @@ const FeaturedProperties = () => {
   };
 
   const handleScheduleViewing = () => {
+    setSelectedProperty(null);
+    
     toast({
       title: "Viewing Scheduled",
       description: "A representative will contact you shortly to confirm your viewing appointment.",
     });
+
+    setTimeout(() => {
+      // Find the specific CTA section with the Schedule Consultation button
+      const ctaSection = document.querySelector('#services .glass-card-dark .flex.flex-col.sm\\:flex-row.gap-4.justify-center');
+      if (ctaSection) {
+        ctaSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 500);
   };
 
   const handleVirtualTour = () => {
@@ -260,25 +271,39 @@ const FeaturedProperties = () => {
   };
 
   const handleContactAgent = () => {
+    setSelectedProperty(null);
+    
     toast({
       title: "Contact Agent",
       description: "Connecting you with our property specialist...",
     });
+
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500);
   };
 
   const handleViewAllProperties = () => {
+    setShowAllProperties(true);
     toast({
       title: "All Properties",
-      description: "Redirecting to all properties page...",
+      description: "Showing all available properties...",
     });
   };
 
   const handleExploreAllProperties = () => {
+    setShowAllProperties(true);
     toast({
       title: "Explore Properties",
-      description: "Loading comprehensive property listings...",
+      description: "Showing comprehensive property listings...",
     });
   };
+
+  // Filter properties based on showAllProperties state
+  const displayedProperties = showAllProperties ? properties : properties.filter(property => property.featured);
 
   return (
     <section id="properties" className="py-20 relative overflow-hidden">
@@ -289,22 +314,26 @@ const FeaturedProperties = () => {
         {/* Header */}
         <div className="text-center mb-16 animate-slide-up">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Featured <span className="text-gradient">Properties</span>
+            {showAllProperties ? 'All' : 'Featured'} <span className="text-gradient">Properties</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Explore our handpicked selection of exceptional properties that offer the perfect blend of luxury, comfort, and location.
+            {showAllProperties 
+              ? 'Browse our complete collection of exceptional properties that offer the perfect blend of luxury, comfort, and location.'
+              : 'Explore our handpicked selection of exceptional properties that offer the perfect blend of luxury, comfort, and location.'}
           </p>
-          <button 
-            className="btn-secondary"
-            onClick={handleViewAllProperties}
-          >
-            View All Properties
-          </button>
+          {!showAllProperties && (
+            <button 
+              className="btn-secondary"
+              onClick={handleViewAllProperties}
+            >
+              View All Properties
+            </button>
+          )}
         </div>
 
         {/* Properties Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {properties.map((property, index) => (
+          {displayedProperties.map((property, index) => (
             <div
               key={property.id}
               className="property-card perspective-1000"
@@ -413,15 +442,17 @@ const FeaturedProperties = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <button 
-            className="btn-primary px-8 py-4 text-lg flex items-center space-x-2 mx-auto group"
-            onClick={handleExploreAllProperties}
-          >
-            <span>Explore All Properties</span>
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </button>
-        </div>
+        {!showAllProperties && (
+          <div className="text-center mt-16">
+            <button 
+              className="btn-primary px-8 py-4 text-lg flex items-center space-x-2 mx-auto group"
+              onClick={handleExploreAllProperties}
+            >
+              <span>Explore All Properties</span>
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Property Details Dialog */}

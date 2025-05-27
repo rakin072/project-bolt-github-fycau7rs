@@ -17,6 +17,27 @@ const HeroSection = () => {
     setFloatingElements(particles);
   }, []);
 
+  const handleContactClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleExploreClick = () => {
+    const propertiesSection = document.getElementById('properties');
+    if (propertiesSection) {
+      propertiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleViewPremiumHomes = () => {
+    const propertiesSection = document.getElementById('properties');
+    if (propertiesSection) {
+      propertiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Ambient Background with Enhanced Effects */}
@@ -119,7 +140,10 @@ const HeroSection = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                <button className="btn-primary px-6 py-3 rounded-xl flex items-center space-x-2 group hover:shadow-lg hover:shadow-electric-500/30 transition-all duration-300">
+                <button 
+                  onClick={handleExploreClick}
+                  className="btn-primary px-6 py-3 rounded-xl flex items-center space-x-2 group hover:shadow-lg hover:shadow-electric-500/30 transition-all duration-300"
+                >
                   <span className="text-shadow-soft">Explore</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
@@ -128,11 +152,17 @@ const HeroSection = () => {
 
             {/* Enhanced CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="btn-primary px-8 py-4 text-lg flex items-center justify-center space-x-2 group hover:shadow-xl hover:shadow-electric-500/30 transition-all duration-500 transform hover:scale-105">
+              <button 
+                onClick={handleViewPremiumHomes}
+                className="btn-primary px-8 py-4 text-lg flex items-center justify-center space-x-2 group hover:shadow-xl hover:shadow-electric-500/30 transition-all duration-500 transform hover:scale-105"
+              >
                 <span className="text-shadow-soft">View Premium Homes</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </button>
-              <button className="btn-secondary px-8 py-4 text-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:scale-105">
+              <button 
+                onClick={handleContactClick}
+                className="btn-secondary px-8 py-4 text-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:scale-105"
+              >
                 <span className="text-shadow-soft">Book Free Consultation</span>
               </button>
             </div>

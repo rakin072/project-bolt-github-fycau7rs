@@ -16,6 +16,15 @@ const ServicesSection = () => {
     }
   };
 
+  const handleNavigation = (section: string, title: string) => {
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    // Update page title if needed
+    document.title = `${title} | Hive&in`;
+  };
+
   const services = [
     {
       icon: Home,
@@ -122,7 +131,7 @@ const ServicesSection = () => {
         <div className="text-center mt-16 glass-card-dark p-8 rounded-2xl">
           <div className="flex flex-col items-center mb-6">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces" 
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=faces" 
               alt="Omar Frauk Rakin - Real Estate Expert" 
               className="w-24 h-24 rounded-full object-cover border-4 border-electric-500/20 shadow-lg mb-4"
             />
@@ -141,7 +150,12 @@ const ServicesSection = () => {
             >
               Schedule Consultation
             </button>
-            <button className="btn-secondary px-8 py-3">Learn More</button>
+            <button 
+              className="btn-secondary px-8 py-3"
+              onClick={() => handleNavigation('about', 'About')}
+            >
+              Learn More
+            </button>
           </div>
         </div>
       </div>

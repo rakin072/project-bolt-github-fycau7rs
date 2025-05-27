@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Clock, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -116,7 +118,14 @@ const ContactSection = () => {
               <p className="text-gray-300 mb-4">
                 Our certified real estate professionals are ready to assist you with personalized service and expert guidance.
               </p>
-              <button className="btn-secondary w-full">Meet Our Team</button>
+              <Link to="/about">
+                <Button 
+                  variant="outline" 
+                  className="w-full bg-gradient-to-r from-electric-500 to-purple-500 text-white border-none hover:from-electric-600 hover:to-purple-600 transition-all duration-300"
+                >
+                  Meet Our Team
+                </Button>
+              </Link>
             </div>
           </div>
 
