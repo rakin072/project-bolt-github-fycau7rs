@@ -7,6 +7,7 @@ const FeaturedProperties = () => {
   const [likedProperties, setLikedProperties] = useState<Set<number>>(new Set());
   const [selectedProperty, setSelectedProperty] = useState<typeof properties[0] | null>(null);
   const [showAllProperties, setShowAllProperties] = useState(false);
+  const [quickViewProperty, setQuickViewProperty] = useState<typeof properties[0] | null>(null);
 
   const properties = [
     {
@@ -226,7 +227,7 @@ const FeaturedProperties = () => {
   };
 
   const handleQuickView = (property: typeof properties[0]) => {
-    // Quick view functionality without toast
+    setQuickViewProperty(property);
   };
 
   const handleViewDetails = (property: typeof properties[0]) => {
@@ -576,6 +577,24 @@ const FeaturedProperties = () => {
                 Contact Agent
               </button>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Quick View Dialog */}
+      <Dialog open={!!quickViewProperty} onOpenChange={() => setQuickViewProperty(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden">
+          <DialogHeader className="p-6">
+            <DialogTitle className="text-2xl font-bold">{quickViewProperty?.title}</DialogTitle>
+            <DialogDescription>{quickViewProperty?.location}</DialogDescription>
+          </DialogHeader>
+          <div className="relative">
+            <img
+              src={quickViewProperty?.image}
+              alt={quickViewProperty?.title}
+              className="w-full h-[600px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-900/50 via-transparent to-transparent" />
           </div>
         </DialogContent>
       </Dialog>
