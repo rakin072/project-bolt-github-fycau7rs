@@ -292,14 +292,27 @@ const FeaturedProperties = () => {
       title: "All Properties",
       description: "Showing all available properties...",
     });
+    const propertiesSection = document.getElementById('properties');
+    if (propertiesSection) {
+      propertiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const handleExploreAllProperties = () => {
     setShowAllProperties(true);
     toast({
-      title: "Explore Properties",
-      description: "Showing comprehensive property listings...",
+      title: "All Properties",
+      description: "Showing all available properties...",
     });
+    
+    // Scroll to the top of properties section
+    const propertiesSection = document.getElementById('properties');
+    if (propertiesSection) {
+      window.scrollTo({
+        top: propertiesSection.offsetTop,
+        behavior: 'smooth'
+      });
+    }
   };
 
   // Filter properties based on showAllProperties state
@@ -446,7 +459,7 @@ const FeaturedProperties = () => {
           <div className="text-center mt-16">
             <button 
               className="btn-primary px-8 py-4 text-lg flex items-center space-x-2 mx-auto group"
-              onClick={handleExploreAllProperties}
+              onClick={handleViewAllProperties}
             >
               <span>Explore All Properties</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
